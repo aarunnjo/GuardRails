@@ -1,0 +1,33 @@
+{
+  "phase": "0b",
+  "date": "2026-09-09",
+  "model": "tihilya/modernbert-base-prompt-injection-detection",
+  "purpose": "check whether a long-context detector removes the need for the windowed cascade in Phase 4",
+  "architecture_confirmed": {
+    "max_position_embeddings": 8192,
+    "source": "config.json, verified 2026-09-09",
+    "base_architecture": "ModernBERT (Answer.AI + LightOn, released 2024-12-20)"
+  },
+  "load_attempt_1": {
+    "result": "killed, exit 137 (SIGKILL)",
+    "system_state": "swap exhausted, ~1.85GB free, other apps (PyCharm, Firefox, 2 other Claude sessions) running",
+    "conclusion": "not reproducible on retry -- likely transient memory pressure, not a fixed disqualifier"
+  },
+  "load_attempt_2": {
+    "result": "success",
+    "peak_rss_mb": 1089.0,
+    "load_time_s": 3.04
+  },
+  "basic_gate": {
+    "attack_alone_score": 1.0000,
+    "benign_alone_score": 0.0014,
+    "result": "PASS"
+  },
+  "long_context_test": {
+    "setup": "identical attack sentence embedded in 1218 tokens of benign filler (well under the 8192 cap)",
+    "score": 0.0226,
+    "expected": "> 0.9 if the model truly uses its full context to find the signal",
+    "result": "FAIL -- classic needle-in-haystack failure. Architecture accepts long input; this fine-tune was not trained to find sparse signal within it."
+  },
+  "decision": "Long-context shortcut REJECTED. Proceed with the 3-tier windowed cascade against deberta-v3-base-prompt-injection-v2 as designed in Phase 4. A large max_position_embeddings value does not imply the fine-tune can use that context for sparse-signal detection -- must be verified empirically, not assumed from config."
+}

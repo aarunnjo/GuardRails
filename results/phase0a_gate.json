@@ -1,0 +1,13 @@
+{
+  "phase": "0a",
+  "date": "2026-09-07",
+  "model": "protectai/deberta-v3-base-prompt-injection-v2",
+  "runtime": "onnxruntime (CPUExecutionProvider), no torch",
+  "load_time_s": 4.53,
+  "attack_score": 1.0000,
+  "benign_score": 0.0000,
+  "peak_rss_mb": 1326.3,
+  "ram_budget_mb": 3072,
+  "ram_used_pct": 43.2,
+  "gate": "PASS"
+}

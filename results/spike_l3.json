@@ -1,0 +1,33 @@
+{
+  "phase": "0c",
+  "date": "2026-09-09",
+  "n_pairs": 20,
+  "n_filler_passages": 400,
+  "sample_set_tokens": 2967,
+  "auc_halves_vs_clean": 0.389,
+  "auc_verdict": "no signal -- Tier 2 as designed will not help",
+  "thresholds_at_fpr": {
+    "target_fpr": 0.05,
+    "per_chunk": 0.03978933356702316,
+    "tier1": 0.0075857441639527595,
+    "tier2": 0.0274626571685075
+  },
+  "recall_by_distance": {
+    "1": {
+      "per_chunk": 0.15,
+      "tier1": 0.05,
+      "tier2": 0.15
+    },
+    "10": {
+      "per_chunk": 0.05,
+      "tier1": 0.05,
+      "tier2": 0.0
+    },
+    "19": {
+      "per_chunk": 0.1,
+      "tier1": 0.05,
+      "tier2": 0.05
+    }
+  },
+  "elapsed_s": 1726.1
+}
