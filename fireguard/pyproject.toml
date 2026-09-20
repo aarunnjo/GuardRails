@@ -1,0 +1,46 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "fireguard"
+version = "0.2.0"
+description = "One-line RAG guardrails: source trust, prompt-injection detection, and hidden-text checks for retrieval pipelines."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "aarunnjo" }]
+keywords = ["rag", "llm", "prompt-injection", "guardrails", "security", "retrieval"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Security",
+]
+dependencies = [
+    "numpy>=1.24",
+    "onnxruntime>=1.17",
+    "huggingface_hub>=0.20",
+    "transformers>=4.40",
+    "lxml>=5.0",
+    "pymupdf>=1.23",
+    "python-docx>=1.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+eval = ["datasets>=2.18", "scikit-learn>=1.3"]
+langchain = ["langchain-core>=0.2"]
+llamaindex = ["llama-index-core>=0.10"]
+ocr = ["rapidocr-onnxruntime>=1.4"]
+
+[project.urls]
+Homepage = "https://github.com/aarunnjo/GuardRails"
+Repository = "https://github.com/aarunnjo/GuardRails"
+
+[tool.hatch.build.targets.wheel]
+packages = ["fireguard"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

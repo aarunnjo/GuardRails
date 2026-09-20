@@ -13,6 +13,7 @@ Three stages, applied in order:
      below is ours.
 """
 import unicodedata
+from dataclasses import replace
 
 from .types import Chunk
 
@@ -44,9 +45,8 @@ def normalize_text(text: str) -> str:
     return "".join(out)
 
 
-def normalize(chunks: list[Chunk], detector) -> list[Chunk]:
-    """CHECKS-pipeline entry point -- signature matches firewall.py's stub."""
-    return [
-        Chunk(text=normalize_text(c.text), source_uri=c.source_uri, tier=c.tier, raw=c.raw)
-        for c in chunks
-    ]
+def normalize(chunks: list[Chunk], ctx) -> list[Chunk]:
+    """CHECKS-pipeline entry point. Runs first, before ctx.store/ctx.detector
+    exist to matter, so it ignores ctx -- kept as a parameter only so every
+    check in the CHECKS list shares one signature."""
+    return [replace(c, text=normalize_text(c.text)) for c in chunks]

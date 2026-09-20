@@ -19,6 +19,14 @@ class Chunk:
                                # for plain-text sources (a chunk retrieved
                                # from a vector DB has no "raw file" behind it).
 
+    # Populated progressively by the scan()/admit() pipeline (Phase 3+).
+    # None until the relevant check has run -- callers never set these.
+    trust: float | None = None            # L1: this source's current trust, [0,1]
+    threshold: float | None = None        # L1: the L2 bar this chunk must clear
+    injection_score: float | None = None  # L2: P(injection) for this chunk's text
+    flagged: bool = False
+    flag_reasons: list[str] = field(default_factory=list)
+
 
 @dataclass
 class RetrievalSet:
